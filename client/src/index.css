@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: "Poppins", sans-serif;
+    background: #141414; /* fallback for old browsers */
+    /*background: -webkit-linear-gradient(to right, #363636, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+    /*background: linear-gradient(to right, #363636, #131313); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: white;
+  }
+
+  .hover-grow {
+    transition: all 0.3s;
+    transform: scale(1);
+  }
+
+  .hovered {
+    transform: scale(1.02);
+  }
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: #2b2b2b;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #948888;
+    border-radius: 100vh;
+  }
+
+  .cls-1 {
+    fill: #d6b49a;
+  }
+  .cls-1,
+  .cls-10,
+  .cls-11,
+  .cls-13,
+  .cls-14,
+  .cls-15,
+  .cls-17,
+  .cls-2,
+  .cls-4,
+  .cls-5,
+  .cls-6 {
+    stroke: #000;
+  }
+  .cls-1,
+  .cls-11,
+  .cls-13,
+  .cls-14,
+  .cls-16,
+  .cls-8 {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .cls-1,
+  .cls-10,
+  .cls-11,
+  .cls-12,
+  .cls-13,
+  .cls-14,
+  .cls-15,
+  .cls-16,
+  .cls-17,
+  .cls-2,
+  .cls-3,
+  .cls-4,
+  .cls-5,
+  .cls-6,
+  .cls-7,
+  .cls-8,
+  .cls-9 {
+    stroke-width: 3px;
+  }
+  .cls-2 {
+    fill: #020202;
+  }
+  .cls-10,
+  .cls-12,
+  .cls-15,
+  .cls-17,
+  .cls-2,
+  .cls-3,
+  .cls-4,
+  .cls-5,
+  .cls-6,
+  .cls-7,
+  .cls-9 {
+    stroke-miterlimit: 10;
+  }
+  .cls-3 {
+    fill: #818181;
+  }
+  .cls-12,
+  .cls-16,
+  .cls-3,
+  .cls-7,
+  .cls-8,
+  .cls-9 {
+    stroke: #191818;
+  }
+  .cls-4 {
+    fill: #dcdbda;
+  }
+  .cls-5 {
+    fill: #4ea7f1;
+  }
+  .cls-14,
+  .cls-6 {
+    fill: #f8f3ed;
+  }
+  .cls-16,
+  .cls-7 {
+    fill: #333;
+  }
+  .cls-13,
+  .cls-8 {
+    fill: none;
+  }
+  .cls-9 {
+    fill: #f8f59c;
+  }
+  .cls-10,
+  .cls-11 {
+    fill: #f3d2c9;
+  }
+  .cls-15 {
+    fill: #8bb174;
+  }
+  .cls-17 {
+    fill: #da4e22;
+  }
+}

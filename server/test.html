@@ -1,0 +1,153 @@
+import { Layout } from "./components/Layout.jsx";
+import { Routes, Route, useNavigate } from "react-router-dom";
+
+import { MainPage } from "./pages/MainPage";
+import { ForumPage } from "./pages/ForumPage";
+import { UserPlantsPage } from "./pages/UserPlantsPage.jsx";
+import { PlantPage } from "./pages/PlantPage";
+import { UserPostsPage } from "./pages/UserPostsPage.jsx";
+import { PostPage } from "./pages/PostPage";
+import { AddPlantPage } from "./pages/AddPlantPage";
+import { AddPostPage } from "./pages/AddPostPage";
+import { RegisterPage } from "./pages/RegisterPage";
+import { LoginPage } from "./pages/LoginPage";
+import { EditPlantPage } from "./pages/EditPlantPage";
+import { EditPostPage } from "./pages/EditPostPage";
+import { ProfilePage } from "./pages/ProfilePage.jsx";
+import { ErrorPage } from "./pages/ErrorPage";
+import { Chat } from "./components/Chat.jsx";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { checkIsAuth } from "./redux/features/auth/authSlice";
+import { getMe } from "./redux/features/auth/authSlice.js";
+
+function App() {
+  const dispatch = useDispatch();
+  const navigate = useNavigateннн;
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
+
+  const { user } = useSelector((state) => state.auth);
+
+  const isAuth = useSelector(checkIsAuth);
+
+  const isAdmin = () => {
+    if (user?.role[0] === "spec") return true;
+    else return false;
+  };
+
+  const renderPrivatePage = (component) => {
+    if (isAuth && user?.role[0] === "user") {
+      return component;
+    } else {
+      return navigate("/error");
+    }
+  };
+
+  // Функция для рендеринга компонента, доступного только администраторам
+  const renderAdminPage = (component) => {
+    if (isAdmin()) {
+      return component;
+    } else {
+      return navigate("/error");
+    }
+  };
+
+  return (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+
+        <Route
+          path="/plants/:id/edit"
+          element={renderAdminPage(<EditPlantPage />)}
+        />
+        <Route path="/plants/new" element={renderAdminPage(<AddPlantPage />)} />
+
+        <Route path="/plants" element={renderPrivatePage(<UserPlantsPage />)} />
+        <Route path="/posts" element={renderPrivatePage(<UserPostsPage />)} />
+        <Route path="/profile" element={renderPrivatePage(<ProfilePage />)} />
+
+        <Route
+          path="/posts/:id"
+          element={
+            <>
+              {renderPrivatePage(<PostPage />)}
+              {renderAdminPage(<PostPage />)}
+            </>
+          }
+        />
+
+        <Route
+          path="/posts/:id/edit"
+          element={
+            <>
+              {renderPrivatePage(<EditPostPage />)}
+              {renderAdminPage(<EditPostPage />)}
+            </>
+          }
+        />
+        <Route
+          path="/plants/:id"
+          element={
+            <>
+              {renderPrivatePage(<PlantPage />)}
+              {renderAdminPage(<PlantPage />)}
+            </>
+          }
+        />
+        <Route
+          path="/posts/new"
+          element={
+            <>
+              {renderPrivatePage(<EditPostPage />)}
+              {renderAdminPage(<EditPostPage />)}
+            </>
+          }
+        />
+
+        <Route
+          path="/forum"
+          element={
+            <>
+              {renderPrivatePage(<ForumPage />)}
+              {renderAdminPage(<ForumPage />)}
+            </>
+          }
+        />
+
+        
+
+        <Route path="/error" element={<ErrorPage />} />
+        <Route path="*" element={navigate("/error")} />
+        {/* <Route path='/chat' element={<Chat />} /> */}
+      </Routes>
+
+      <ToastContainer position="bottom-right" />
+    </Layout>
+  );
+}
+
+export default App;
+
+
+{/* <Route path="/" element={<MainPage />} />
+        <Route path="/forum" element={<ForumPage />} />
+        <Route path="/plants/:id" element={<PlantPage />} />
+        <Route path="/plants/:id/edit" element={<EditPlantPage />} />
+        <Route path="/plants" element={<UserPlantsPage />} />
+        <Route path="/posts" element={<UserPostsPage />} />
+        <Route path="/posts/:id" element={<PostPage />} />
+        <Route path="/posts/:id/edit" element={<EditPostPage />} />
+        <Route path="/plants/new" element={<AddPlantPage />} />
+        <Route path="/posts/new" element={<AddPostPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/profile" element={<ProfilePage />} /> */}
