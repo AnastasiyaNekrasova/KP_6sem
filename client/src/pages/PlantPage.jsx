@@ -107,7 +107,7 @@ export const PlantPage = () => {
                         >
                             {plant?.imgUrl && (
                                 <img
-                                    src={`http://localhost:5000/${plant.imgUrl}`}
+                                    src={`https://succulents.onrender.com/${plant.imgUrl}`}
                                     alt='img'
                                     className='object-cover w-full'
                                 />

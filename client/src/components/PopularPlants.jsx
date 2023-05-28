@@ -33,7 +33,7 @@ export const PopularPlants = ({ plant }) => {
                     {plant.imgUrl && (
                         <div className=''>
                             <img
-                                src={`http://localhost:5000/${plant.imgUrl}`}
+                                src={`https://succulents.onrender.com/${plant.imgUrl}`}
                                 alt='img'
                                 className='min-w-[30px] h-[30px]  w-[30px] mr-2 object-cover rounded-sm overflow-hidden'
 

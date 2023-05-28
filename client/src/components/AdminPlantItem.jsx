@@ -43,7 +43,7 @@ export const AdminPlantItem = ({ plant }) => {
             {plant.imgUrl && (
                 <div className=''>
                     <img
-                        src={`http://localhost:5000/${plant.imgUrl}`}
+                        src={`https://succulents.onrender.com/${plant.imgUrl}`}
                         alt='img'
                         className='min-w-[40px] h-[40px] w-[40px] mr-2 object-cover rounded-sm overflow-hidden'
                     />
