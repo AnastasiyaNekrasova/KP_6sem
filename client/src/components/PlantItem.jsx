@@ -57,16 +57,16 @@ export const PlantItem = ({ plant }) => {
     }
   };
 
-  const handleSaveInterval = async () => {
-    const userId = user._id;
-    const plantId = plant._id;
-    try {
-      const { data } = await axios.put(`/userplants/interval`, { userId, plantId, interval });
-      dispatch(setPlantInterval(data.interval));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleSaveInterval = async () => {
+  //   const userId = user._id;
+  //   const plantId = plant._id;
+  //   try {
+  //     const { data } = await axios.put(`/userplants/interval`, { userId, plantId, interval });
+  //     dispatch(setPlantInterval(data.interval));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleDeletePlantFromUser = async () => {
     const userId = user._id;
@@ -128,7 +128,7 @@ export const PlantItem = ({ plant }) => {
                 event.preventDefault();
                 handleChangeWateringDate();
               }}
-              className="watering-notification w-fit h-fit py-1.5 px-1.5 items-center justify-center bg-blue-300 rounded-full hover:bg-blue-600"
+              className="watering-notification w-fit h-fit mt-[1px] py-1.5 px-1.5 items-center justify-center bg-blue-300 rounded-full hover:bg-blue-600"
             >
               <BsDropletHalf className="text-blue-900" />
             </button>
@@ -136,7 +136,7 @@ export const PlantItem = ({ plant }) => {
           {location.pathname === "/" ? (
             isAuth && (
               <button
-                className="py-1 px-1.5 bg-white bg-opacity-20 rounded-full hover:bg-teal-600"
+                className="py-1  px-[6px] h-7 bg-white bg-opacity-20 rounded-full hover:bg-teal-600"
                 onClick={(event) => {
                   event.preventDefault();
                   handleAddPlantToUser();
@@ -147,7 +147,7 @@ export const PlantItem = ({ plant }) => {
             )
           ) : (
             <button
-              className="py-1 px-1.5 bg-white bg-opacity-20 rounded-full hover:bg-red-600"
+              className="py-1 px-[7px] h-[30px] bg-white bg-opacity-20 rounded-full hover:bg-red-600"
               onClick={(event) => {
                 event.preventDefault();
                 handleDeletePlantFromUser();

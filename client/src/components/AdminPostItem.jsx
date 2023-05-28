@@ -19,6 +19,7 @@ export const AdminPostItem = ({ post }) => {
   const navigate = useNavigate();
 
   const isAuth = useSelector(checkIsAuth);
+  const [postDeleted, setPostDeleted] = useState(false);
 
   const removePostHandler = () => {
     try {
@@ -48,7 +49,7 @@ export const AdminPostItem = ({ post }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="w-full flex items-center pr-[6px]">
+        <div className="w-4/5 flex items-center pr-[6px]">
           <div
             className={
               post.imgUrl
@@ -69,12 +70,12 @@ export const AdminPostItem = ({ post }) => {
             )}
           </div>
 
-          <div className="w-1/5 mr-4">
+          <div className="w-[25%] mr-4">
             <div className="overflow-hidden text-ellipsis whitespace-nowrap">
               {post.title}
             </div>
           </div>
-          <div className="w-2/5">
+          <div className="w-[70%]">
             <div className="overflow-hidden text-xs text-ellipsis whitespace-nowrap">
               {post.text}
             </div>

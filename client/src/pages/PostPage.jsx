@@ -92,7 +92,7 @@ export const PostPage = () => {
         )
     }
     return (
-        <div className='mt-32 md:mt-40 xl:mt-28 w-[90%] mx-auto'>
+        <div className='mt-20 w-[90%] mx-auto'>
             <button className='text-sm md:text-basic xl:text-lg text-white border max-w-fit border-white font-bold hover:bg-[#292929] py-1 px-5 mt-5'>
                 <Link className='flex' to={'/forum'}>
                     Back
@@ -105,7 +105,7 @@ export const PostPage = () => {
                         <div
                             className={
                                 post?.imgUrl
-                                    ? 'flex rouded-sm h-80'
+                                    ? 'flex rouded-sm h-[400px]'
                                     : 'flex rounded-sm'
                             }
                         >
@@ -113,7 +113,7 @@ export const PostPage = () => {
                                 <img
                                     src={`http://localhost:5000/${post.imgUrl}`}
                                     alt='img'
-                                    className='object-cover w-full'
+                                    className='object-cover w-fit'
                                 />
                             )}
                         </div>
@@ -128,7 +128,7 @@ export const PostPage = () => {
                         </div>
                     </div>
                     <div className='text-white text-xl'>{post.title}</div>
-                    <p className='text-white opacity-60 text-xs pt-4'>
+                    <p className='text-white opacity-60 text-xs whitespace-pre-wrap pt-4'>
                         {post.text}
                     </p>
 

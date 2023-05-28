@@ -1,16 +1,12 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import logo from "../../public/images/logos/Logo9.svg";
 import guest from "../../public/images/usersPhoto/free-icon-avatar-805390.png";
 
 export const GuestNavbar = () => {
 
-    const location = useLocation();
-    const showNav = !["/login", "/register"].includes(location.pathname);
-
     return(
-        showNav && (
             <div className={`{max-[1420px]:left-1/2 max-[1420px]:-ml-[710px] md:left-0 md:ml-0 m-auto bg-[#292929] flex items-center justify-between fixed shadow-lg shadow-gray-500 p-2 w-full z-10 top-0`}>
               <nav className="flex items-center justify-between flex-wrap w-full">
                 <div className="flex items-center flex-shrink-0 text-white mr-6">
@@ -38,6 +34,5 @@ export const GuestNavbar = () => {
                 />
               </div>
             </div>
-          )
     )
 }

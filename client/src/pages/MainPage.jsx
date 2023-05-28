@@ -5,6 +5,8 @@ import { PlantItem } from "../components/PlantItem";
 import { getAllPlants } from "../redux/features/plant/plantSlice";
 import { checkIsAuth, resetStatus } from "../redux/features/auth/authSlice";
 import { BsPlusSquare } from 'react-icons/bs'
+import axios from "axios";
+import { allUsersRoute, host } from "../utils/APIRoutes";
 
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,6 +29,13 @@ export const MainPage = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
+    if (!user.isAvatarImageSet) {
+      navigate("/setAvatar");
+    }
+  }, [user]);
+
+  
+  useEffect(() => {
     if (status) {
       toast(status);
     }
@@ -37,7 +46,6 @@ export const MainPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 11;
 
-  // Logic to determine the index range of plants to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentPlants = plants.slice(indexOfFirstItem, indexOfLastItem);
@@ -79,12 +87,12 @@ export const MainPage = () => {
         </div>
       ) : (
         <div className="w-full flex flex-col">
-         <div className={`hover-grow ${isHovered ? 'hovered' : ''} flex h-12 bg-[#292929] text-xs w-full md:text-base xl:text-lg p-2 text-gray-300 hover:bg-[#3E3E3E] hover:text-white gap-5`}
-                onClick={(e)=>navigate('/plants/new')}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}>
-                    <BsPlusSquare className="text-[32px]"/>
-                </div>
+          <div className={`hover-grow ${isHovered ? 'hovered' : ''} flex h-12 bg-[#292929] text-xs w-full md:text-base xl:text-lg p-2 text-gray-300 hover:bg-[#3E3E3E] hover:text-white gap-5`}
+            onClick={(e) => navigate('/plants/new')}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}>
+            <BsPlusSquare className="text-[32px]" />
+          </div>
           <div className="w-full">
             {currentPlants?.map((plant, idx) => (
               <AdminPlantItem key={idx} plant={plant} />
@@ -95,9 +103,8 @@ export const MainPage = () => {
               {Array.from({ length: totalPages }, (_, index) => (
                 <button
                   key={index}
-                  className={`mx-1 w-6 text-center rounded bg-gray-600 text-gray-200 hover:opacity-80 hover:text-white transition-colors duration-300 ${
-                    currentPage === index + 1 ? "bg-green-500 text-white" : ""
-                  }`}
+                  className={`mx-1 w-6 text-center rounded bg-gray-600 text-gray-200 hover:opacity-80 hover:text-white transition-colors duration-300 ${currentPage === index + 1 ? "bg-green-500 text-white" : ""
+                    }`}
                   onClick={() => handleClickPage(index + 1)}
                 >
                   {index + 1}

@@ -25,12 +25,12 @@ export const PostItem = ({ post }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={post.imgUrl ? "flex rouded-sm h-80" : "flex rounded-sm"}>
+      <div className={post.imgUrl ? "flex rouded-sm h-80 justify-center bg-white bg-opacity-10 rounded-sm" : "flex rounded-sm"}>
         {post.imgUrl && (
           <img
             src={`http://localhost:5000/${post.imgUrl}`}
             alt="img"
-            className="object-cover w-full"
+            className="object-cover w-fit"
           />
         )}
       </div>

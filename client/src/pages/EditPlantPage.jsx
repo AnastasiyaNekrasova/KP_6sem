@@ -24,7 +24,6 @@ export const EditPlantPage = () => {
             setOldImage(data.imgUrl);
             plantname.onChange({ target: { value: data.plantname } });
             descript.onChange({ target: { value: data.descript } });
-            console.log(plantname, descript)
         } catch (error) {
             console.log(error);
         }

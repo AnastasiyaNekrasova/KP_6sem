@@ -6,31 +6,32 @@ import jwt from 'jsonwebtoken'
 // Register user
 export const register = async (req, res) => {
     try {
-        const { username, password } = req.body
-
-        if(!username || !password){
+        const { username, email, password } = req.body;
+        console.log('ok')
+        if (!username || !password) {
             return res.json({
                 message: 'Fill in all the fields!'
             })
         }
 
         const isUsed = await User.findOne({ username })
-
         if (isUsed) {
-            return res.json({
-                message: 'This username is already taken'
-            })
+            return res.json({ message: "Username already used"});
         }
+        const emailCheck = await User.findOne({ email });
+        if (emailCheck)
+            return res.json({ message:"Email already used"});
 
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(password, salt)
 
-        const userRole = await Role.findOne({value:'user'})
+        const userRole = await Role.findOne({ value: 'user' })
 
         const newUser = new User({
             username,
+            email,
             password: hash,
-            role:[userRole.value]
+            role: [userRole.value]
         })
 
         const token = jwt.sign(
@@ -43,7 +44,7 @@ export const register = async (req, res) => {
         )
 
         await newUser.save()
-                
+
         res.json({
             newUser,
             token,

@@ -5,7 +5,7 @@ export const Layout = ({ children }) => {
   return (
     <React.Fragment>
         <Navbar />
-      <div className="container mx-0 min-w-full h-screen reltive">
+      <div className="container mx-0 min-w-full reltive">
         {children}
       </div>
     </React.Fragment>

@@ -1,12 +1,12 @@
-import React, { useState, useCallback } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify'
 
 import { checkIsAuth, logout } from "../../redux/features/auth/authSlice";
 
 import logo from "../../public/images/logos/Logo9.svg";
-import userPhoto from "../../public/images/usersPhoto/photo.jpg";
+import userPhoto from "../../public/images/usersPhoto/icons8-пользователь-100.png";
 
 const activeStyles = {
   color: "white",
@@ -17,15 +17,24 @@ const menuItems = [
   { to: "/plants", label: "My Plants" },
   { to: "/forum", label: "Forum" },
   { to: "/posts", label: "My Posts" },
+  { to: "/chat", label: "Chat" },
 ];
 
 export const UserNavbar = (() => {
   const isAuth = useSelector(checkIsAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    if (user.avatarImage === '') {
+      const avatarImage = userPhoto;
+    }
+  }, [user.avatarImage]);
 
   const handleNavToggle = useCallback(() => {
     setIsNavOpen(prevState => !prevState);
@@ -90,7 +99,7 @@ export const UserNavbar = (() => {
         <button className="flex items-center" onClick={toggleMenu}>
           <div className="fixed top-2 -right-2 md:top-3 md:-right-1 lg:top-4 lg:right-1">
             <img
-              src={userPhoto}
+              src={user.avatarImage}
               alt=""
               className="h-12 w-12 mx-5 object-cover rounded-full overflow-hidden"
             />

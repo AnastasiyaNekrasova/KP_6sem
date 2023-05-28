@@ -78,7 +78,7 @@ export const postSlice = createSlice({
             state.loading = false
             state.posts.push(action.payload)
         },
-        [createPost.rejected]: (state) => {
+        [createPost.rejected]: (state, action) => {
             state.status = action.payload.message
             state.loading = false
         },
@@ -110,10 +110,10 @@ export const postSlice = createSlice({
             state.status = null
             state.loading = true
         },
-        [removePost.fulfilled]: (state, action) => {
+        [removePost.fulfilled]: (state) => {
             state.loading = false
         },
-        [removePost.rejected]: (state) => {
+        [removePost.rejected]: (state, action) => {
             state.status = action.payload.message
             state.loading = false
             state.posts = state.posts.filter(

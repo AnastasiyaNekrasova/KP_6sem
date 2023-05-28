@@ -17,7 +17,7 @@ import { EditPostPage } from "./pages/EditPostPage";
 import { ProfilePage } from "./pages/ProfilePage.jsx";
 import { ErrorPage000 } from "./pages/ErrorPage000.jsx";
 import { ErrorPage } from "./pages/ErrorPage.jsx";
-import { Chat } from "./components/Chat.jsx";
+import { Chat, ChatPage } from "./pages/ChatPage.jsx";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,6 +25,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getMe } from "./redux/features/auth/authSlice.js";
 import { selectUserRole } from "./redux/features/auth/authSlice";
+import { SetAvatar } from "./components/chat/SetAvatar.jsx";
 
 function App() {
     const userRole = useSelector(selectUserRole);
@@ -56,6 +57,8 @@ function App() {
                         <Route path="/plants/:id" element={<PlantPage />} />
                         <Route path="/plants/new" element={<AddPlantPage />} />
                         <Route path="/plants/:id/edit" element={<EditPlantPage />} />
+                        <Route path="/chat" element={<ChatPage />} />
+                        <Route path="/setAvatar" element={<SetAvatar />} />
                     </>
                 )}
                 {/* User routes */}
@@ -70,6 +73,8 @@ function App() {
                         <Route path="/posts/:id" element={<PostPage />} />
                         <Route path="/profile" element={<ProfilePage />} />
                         <Route path="/plants/new" element={<ErrorPage />} />
+                        <Route path="/chat" element={<ChatPage />} />
+                        <Route path="/setAvatar" element={<SetAvatar />} />
                     </>
                 )}
                 <Route path="/*" element={<ErrorPage />} />

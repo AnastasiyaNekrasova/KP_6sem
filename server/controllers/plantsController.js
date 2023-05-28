@@ -80,6 +80,7 @@ export const removePlant = async (req, res) => {
         if (!plant) return res.json({ message: 'There is no such plant' })
 
         await Comment.deleteMany({ plant: plant._id })
+        await UserPlants.deleteMany({ plant: plant._id });
 
         res.json({ message: 'Plant and associated comments were deleted' })
     } catch (error) {

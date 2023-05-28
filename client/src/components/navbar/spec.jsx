@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify'
+import axios from "axios";
 
 import { checkIsAuth, logout } from "../../redux/features/auth/authSlice";
 import { addPhotoToUser } from "../../utils/userModification";
+import { setAvatarRoute } from "../../utils/APIRoutes";
 
 import logo from "../../public/images/logos/Logo9.svg";
 import spec from "../../public/images/usersPhoto/puffer-fish.png";
@@ -15,66 +17,71 @@ import avatar4 from "../../public/images/usersPhoto/panda.png";
 import avatar5 from "../../public/images/usersPhoto/walrus.png";
 
 export const SpecNavbar = () => {
-    const isAuth = useSelector(checkIsAuth);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const location = useLocation();
+  const isAuth = useSelector(checkIsAuth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const {user} = useSelector((state) => state.auth)
+  const { user } = useSelector((state) => state.auth)
 
-    const activeStyles = {
-        color: "white",
-    };
+  const activeStyles = {
+    color: "white",
+  };
 
-    const [isNavOpen, setIsNavOpen] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(spec);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(user.avatarImage);
 
-    const handleNavToggle = () => {
-        setIsNavOpen(!isNavOpen);
-    };
+  const handleNavToggle = () => {
+    setIsNavOpen(!isNavOpen);
+  };
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
-    const logoutHandler = () => {
-        dispatch(logout());
-        window.localStorage.removeItem("token");
-        toast("You are logged out");
-        navigate("/login");
-    };
+  const logoutHandler = () => {
+    dispatch(logout());
+    window.localStorage.removeItem("token");
+    toast("You are logged out");
+    navigate("/login");
+  };
 
-    const avatarOptions = [spec, avatar1, avatar2, avatar3, avatar4, avatar5];
+  const avatarOptions = [spec, avatar1, avatar2, avatar3, avatar4, avatar5];
 
-    const handleAvatarClick = async (avatar) => {
-        setSelectedImage(avatar);
-        toggleMenu();      
-        try {
-          await uploadPhoto(); 
-        } catch (error) {
-          console.error('Error selecting avatar:', error);
-        }
+  async function getImageData(imagePath) {
+    const response = await fetch(imagePath);
+    const blob = await response.blob();
+
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result);
       };
-    
-const uploadPhoto = async (file) => {
-  if (!file) {
-    return;
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
   }
-  try {
-    const userId = user._id;
-    const formData = new FormData();
-    formData.append("image", file);
-    const data = await addPhotoToUser(userId, formData);
-    console.log("Photo added:", data);
-  } catch (error) {
-    console.error("Error adding photo:", error);
-  }
-};
 
-      useEffect(()=>{
-        console.log(user)
-      }, [user])
+  useEffect(() => {
+    if (user.avatarImage === '') {
+      handleAvatarClick(spec);
+    }
+  }, [user.avatarImage]);
+
+  const handleAvatarClick = async (avatar) => {
+    setSelectedImage(avatar);
+    try {
+      getImageData(avatar)
+        .then(async (imageData) => {
+          const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
+            image: imageData,
+          });
+        })
+    } catch (error) {
+      console.error('Error selecting avatar', error);
+    }
+  };
 
   return (
     <div className={`max-[1420px]:left-1/2 max-[1420px]:-ml-[710px] md:left-0 md:ml-0 m-auto bg-[#292929] flex text-center items-center justify-between fixed shadow-lg shadow-gray-500 p-2 w-full h-fit z-50 top-0 ${isAuth ? "static" : "hidden"
@@ -135,8 +142,19 @@ const uploadPhoto = async (file) => {
               </NavLink>
             </li>
 
+            <li className="mr-3">
+              <NavLink
+                to={"/chat"}
+                onClick={handleNavToggle}
+                className="inline-block text-gray-600 hover:text-gray-400 no-underline py-2 px-4"
+                style={location.pathname === "/chat" ? activeStyles : undefined}
+              >
+                Chat
+              </NavLink>
+            </li>
+
             <li className="mr-3 inline-block text-gray-600 hover:text-gray-400 no-underline py-2 px-4 cursor-pointer" onClick={logoutHandler}>
-                Sign Out
+              Sign Out
             </li>
 
           </ul>
@@ -154,11 +172,10 @@ const uploadPhoto = async (file) => {
           </div>
         </button>
         <div
-          className={`absolute right-0 mt-8 py-2 bg-[#151515] shadow-lg shadow-gray-500 rounded transform transition-all duration-300 ease-in-out ${
-            isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          }`}
+          className={`absolute right-0 mt-8 py-2 bg-[#151515] shadow-lg shadow-gray-500 rounded transform transition-all duration-300 ease-in-out ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            }`}
         >
-          <div className="flex flex-wrap justify-center">
+          <div className="flex justify-center">
             {avatarOptions.map((avatar) => (
               <button
                 key={avatar}

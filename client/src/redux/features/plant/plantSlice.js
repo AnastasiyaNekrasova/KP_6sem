@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from '../../../utils/axios'
 
 const initialState = {
-    status,
+    status: null,
     plants: [],
     popularPlants: [],
     userPlants: [],
@@ -110,7 +110,7 @@ export const plantSlice = createSlice({
             state.loading = false
             state.plants.push(action.payload)
         },
-        [createPlant.rejected]: (state) => {
+        [createPlant.rejected]: (state, action) => {
             state.status = action.payload.message
             state.loading = false
         },
@@ -138,7 +138,7 @@ export const plantSlice = createSlice({
                 (plant) => plant._id !== action.payload._id
             )
         },
-        [removePlant.rejected]: (state) => {
+        [removePlant.rejected]: (state, action) => {
             state.status = action.payload.message
             state.loading = false
         },
@@ -167,7 +167,7 @@ export const plantSlice = createSlice({
             state.status = action.payload.message
             state.userPlants.push(action.payload.plant);
         },
-        [addPlantToUser.rejected]: (state) => {
+        [addPlantToUser.rejected]: (state, action) => {
             state.loading = false
             state.status = action.payload.message
         },
@@ -180,7 +180,7 @@ export const plantSlice = createSlice({
             state.loading = false
             state.status = action.payload.message
         },
-        [deletePlantFromUser.rejected]: (state) => {
+        [deletePlantFromUser.rejected]: (state, action) => {
             state.loading = false
             state.status = action.payload.message
         },
