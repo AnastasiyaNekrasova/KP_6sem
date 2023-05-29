@@ -83,7 +83,7 @@ export const EditPlantPage = () => {
 >
   {oldImage && (
     <img
-      src={`https://succulents.onrender.com/${oldImage}`}
+      src={`https://anastasiyanekrasova.github.io//${oldImage}`}
       alt={oldImage.name}
       className="w-full object-cover mt-3 mx-5"
     />

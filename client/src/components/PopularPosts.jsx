@@ -18,7 +18,7 @@ export const PopularPosts = ({ post }) => {
                     {post.imgUrl && (
                         <div className=''>
                             <img
-                                src={`https://succulents.onrender.com/${post.imgUrl}`}
+                                src={`https://anastasiyanekrasova.github.io//${post.imgUrl}`}
                                 alt='img'
                                 className='min-w-[30px] h-[30px]  w-[30px] mr-2 object-cover rounded-sm overflow-hidden'
 

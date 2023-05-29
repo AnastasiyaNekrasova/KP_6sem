@@ -80,11 +80,11 @@ export const UserNavbar = (() => {
           } pt-3 md:pt-0`} id="nav-content">
           <ul className="list-reset md:flex justify-end flex-1 ">
             {menuItems.map(({ to, label }) => (
-              <li key={to} className="mr-3">
+              <li key={to} className="mr-0 lg:mr-3">
                 <NavLink
                   to={to}
                   onClick={handleNavToggle}
-                  className="inline-block text-gray-600 hover:text-gray-400 no-underline py-2 px-4"
+                  className="inline-block text-gray-600 hover:text-gray-400 no-underline py-2 px-3 lg:px-4"
                   style={location.pathname === to ? activeStyles : undefined}
                 >
                   {label}

@@ -24,7 +24,7 @@ export const ForumPage = () => {
 
   useEffect(() => {
     dispatch(getAllPosts());
-  }, [dispatch]);
+  }, [posts]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 11;

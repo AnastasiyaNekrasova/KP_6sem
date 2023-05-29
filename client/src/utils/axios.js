@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: 'https://succulents.onrender.com/api',
+    baseURL: 'https://anastasiyanekrasova.github.io//api',
 })
 
 instance.interceptors.request.use((config) => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export const CommentItem = ({ cmt }) => {
     const avatar = cmt.username?.toUpperCase()?.split('')?.slice(0, 1);

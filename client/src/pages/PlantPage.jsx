@@ -28,17 +28,6 @@ export const PlantPage = () => {
     const params = useParams()
     const dispatch = useDispatch()
 
-    const removePlantHandler = () => {
-        try {
-            dispatch(removePlant(params.id))
-            toast('Plant was deleted')
-            navigate('/plants')
-            window.location.reload()
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     const handleSubmit = () => {
         try {
             const uId = user._id
@@ -79,7 +68,7 @@ export const PlantPage = () => {
     useEffect(() => {
         fetchComments()
     }, [fetchComments])
-    // useEffect(() => { alert() }, [])
+
     if (!plant) {
         return (
             <div className='text-xl text-center text-white py-10'>
@@ -107,7 +96,7 @@ export const PlantPage = () => {
                         >
                             {plant?.imgUrl && (
                                 <img
-                                    src={`https://succulents.onrender.com/${plant.imgUrl}`}
+                                    src={`https://anastasiyanekrasova.github.io//${plant.imgUrl}`}
                                     alt='img'
                                     className='object-cover w-full'
                                 />
@@ -130,49 +119,33 @@ export const PlantPage = () => {
                                 <span>{plant.comments?.length || 0} </span>
                             </button>
                         </div>
-
-                        {user?._id === plant.author && (
-                            <div className='flex gap-3 mt-4'>
-                                <button
-                                    onClick={(e) => navigate(`/plants/${params.id}/edit`)}
-                                    className='flex items-center justify-center gap-2 text-white opacity-50'>
-                                    <AiTwotoneEdit />
-                                </button>
-                                <button
-                                    onClick={removePlantHandler}
-                                    className='flex items-center justify-center gap-2  text-white opacity-50'
-                                >
-                                    <AiFillDelete />
-                                </button>
-                            </div>
-                        )}
                     </div>
                 </div>
-                {user?.role[0] === 'user'|| user?.role[0] ==='spec' && (<div className='w-1/3 p-8 bg-gray-700 flex flex-col gap-2 rounded-sm'>
-                    <form
-                        className='flex gap-2'
-                        onSubmit={(e) => e.preventDefault()}
-                    >
-                        <input
-                            type='text'
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                            placeholder='Comment'
-                            className='text-black w-full rounded-sm bg-gray-400 border p-2 text-xs outline-none placeholder:text-gray-700'
-                        ></input>
-                        <button
-                            type='submit'
-                            onClick={handleSubmit}
-                            className='flex justify-center items-center bg-[#292929] text-xs text-white rounded-sm py-2 px-4'
+                    <div className='w-1/3 p-8 bg-gray-700 flex flex-col gap-2 rounded-sm'>
+                        <form
+                            className='flex gap-2'
+                            onSubmit={(e) => e.preventDefault()}
                         >
-                            Send
-                        </button>
-                    </form>
+                            <input
+                                type='text'
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                                placeholder='Comment'
+                                className='text-black w-full rounded-sm bg-gray-400 border p-2 text-xs outline-none placeholder:text-gray-700'
+                            ></input>
+                            <button
+                                type='submit'
+                                onClick={handleSubmit}
+                                className='flex justify-center items-center bg-[#292929] text-xs text-white rounded-sm py-2 px-4'
+                            >
+                                Send
+                            </button>
+                        </form>
 
-                    {Array.isArray(comments) && comments.map((cmt) => (
-                        <CommentItem key={cmt._id} cmt={cmt} />
-                    ))}
-                </div>)}
+                        {Array.isArray(comments) && comments.map((cmt) => (
+                            <CommentItem key={cmt._id} cmt={cmt} />
+                        ))}
+                    </div>
             </div>
         </div>
     )

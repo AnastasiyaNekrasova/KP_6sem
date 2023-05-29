@@ -60,7 +60,7 @@ export const RegisterPage = () => {
 
     return (
         <>
-            <div className="relative h-full w-full bg-suk-bg bg-center bg-no-repeat bg-fixed">
+            <div className="relative h-[100vh] w-full bg-suk-bg bg-center bg-no-repeat bg-fixed">
                 <div className="h-5/6 flex flex-col align-middle">
 
                     <div className="flex flex-col justify-center md:justify-start my-auto px-8 md:px-24 lg:px-32">

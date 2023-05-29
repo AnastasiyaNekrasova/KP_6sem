@@ -40,48 +40,38 @@ export const AdminPostItem = ({ post }) => {
   };
 
   return (
-    <div className="bg-[#292929] my-1 justify-between cursor-pointer">
-      <div
-        onClick={handleLinkClick}
-        className={`hover-grow ${
-          isHovered ? "hovered" : ""
-        } flex text-xs w-full md:text-base xl:text-lg p-2 text-gray-300 hover:bg-[#3E3E3E] hover:text-white gap-5`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <div className="w-4/5 flex items-center pr-[6px]">
-          <div
-            className={
-              post.imgUrl
-                ? "w-[full] flex items-center pr-[6px]"
-                : "w-[full] flex items-center pr-[6px]"
-            }
-          >
-            {post.imgUrl ? (
-              <div className="">
-                <img
-                  src={`https://succulents.onrender.com/${post.imgUrl}`}
-                  alt="img"
-                  className="min-w-[30px] h-[30px]  w-[30px] mr-2 object-cover rounded-sm overflow-hidden"
-                />
-              </div>
-            ) : (
-              <div className="min-w-[30px] h-[30px]  w-[30px] mr-2 object-cover rounded-sm overflow-hidden bg-white bg-opacity-20"></div>
-            )}
-          </div>
+    <div onClick={handleLinkClick}
+      className={`hover-grow ${isHovered ? 'hovered' : ''} bg-[#292929] my-1 cursor-pointer justify-between flex text-xs w-full md:text-base xl:text-lg p-2 text-gray-300 hover:bg-[#3E3E3E] hover:text-white gap-2`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {post.imgUrl ? (
+        <div className="">
+          <img
+            src={`https://anastasiyanekrasova.github.io//${post.imgUrl}`}
+            alt="img"
+            className='min-w-[40px] h-[40px] w-[40px] mr-2 object-cover rounded-sm overflow-hidden'
+          />
+        </div>
+      ) : (
+        <div className = 'min-w-[40px] h-[40px] w-[40px] mr-2 object-cover rounded-sm overflow-hidden bg-white bg-opacity-20'></div>
+      )}
 
-          <div className="w-[25%] mr-4">
-            <div className="overflow-hidden text-ellipsis whitespace-nowrap">
-              {post.title}
-            </div>
-          </div>
-          <div className="w-[70%]">
-            <div className="overflow-hidden text-xs text-ellipsis whitespace-nowrap">
+      <div className='-ml-4 xl:-ml-12 w-4/5'>
+        <div className='overflow-hidden text-ellipsis whitespace-nowrap text-base'>
+          {post.title}
+        </div>
+        <div className=''>
+          <div className='w-[17rem] md:w-[28rem] lg:w-[43rem] xl:w-[58rem] 2xl:w-[73rem] overflow-hidden flex text-xs text-ellipsis whitespace-nowrap'>
+            <div className='overflow-hidden text-ellipsis whitespace-nowrap'>
               {post.text}
             </div>
           </div>
         </div>
+      </div>
 
+
+      <div className='flex justify-between gap-2 w-[90px]'>
         <div className="flex gap-2">
           <div className="flex items-center gap-1 text-xs text-white opacity-50">
             <AiFillEye /> <span>{post.views}</span>
@@ -91,7 +81,7 @@ export const AdminPostItem = ({ post }) => {
           </div>
         </div>
 
-        <div className="flex gap-3 w-10 ml-4">
+        <div className='flex gap-2'>
           <button
             onClick={(event) => {
               event.stopPropagation();

@@ -81,12 +81,12 @@ export const deletePlantFromUser = createAsyncThunk(
 
 export const getUserPlants = createAsyncThunk(
     'plant/getUserPlants',
-    async ( uID , { rejectWithValue }) => {
+    async ( userId ) => {
         try {
-            const response = await axios.get(`/userplants/${uID}`);
-            return response.data;
+            const { data } = await axios.get('/userplants', { params: { userId } });
+            return data;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            console.log(error)
         }
     }
 );
@@ -165,7 +165,6 @@ export const plantSlice = createSlice({
         [addPlantToUser.fulfilled]: (state, action) => {
             state.loading = false
             state.status = action.payload.message
-            state.userPlants.push(action.payload.plant);
         },
         [addPlantToUser.rejected]: (state, action) => {
             state.loading = false

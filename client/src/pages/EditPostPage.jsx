@@ -60,7 +60,7 @@ export const EditPostPage = () => {
             >
                 {oldImage && (
                     <img
-                    src={`https://succulents.onrender.com/${oldImage}`}
+                    src={`https://anastasiyanekrasova.github.io//${oldImage}`}
                     alt={oldImage.name}
                         className={`hover-grow ${isHovered ? 'hovered' : ''} w-32 h-32 object-cover cursor-pointer `}
                         onMouseEnter={() => setIsHovered(true)}

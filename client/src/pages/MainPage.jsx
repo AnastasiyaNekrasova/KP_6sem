@@ -5,17 +5,10 @@ import { PlantItem } from "../components/PlantItem";
 import { getAllPlants } from "../redux/features/plant/plantSlice";
 import { checkIsAuth, resetStatus } from "../redux/features/auth/authSlice";
 import { BsPlusSquare } from 'react-icons/bs'
-import axios from "axios";
-import { allUsersRoute, host } from "../utils/APIRoutes";
 
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AdminPlantItem } from "../components/AdminPlantItem";
-
-const FIELDS = {
-  NAME: "name",
-  ROOM: "room",
-};
 
 export const MainPage = () => {
   const isAuth = useSelector(checkIsAuth);
@@ -29,22 +22,20 @@ export const MainPage = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    if (!user.isAvatarImageSet) {
-      navigate("/setAvatar");
+    if (isAuth) {
+      if (!user.isAvatarImageSet) {
+        navigate("/setAvatar");
+      }
     }
-  }, [user]);
+  }, [isAuth, user]);
 
-  
+
   useEffect(() => {
-    if (status) {
-      toast(status);
-    }
-    dispatch(resetStatus());
     dispatch(getAllPlants());
-  }, [dispatch, status]);
+  }, [plants]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 11;
+  const itemsPerPage = 9;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -67,7 +58,7 @@ export const MainPage = () => {
   return (
     <div className="max-w-[1420px] w-[90%] mx-auto  mt-24 md:mt-28 xl:mt-28">
       {user?.role[0] === "user" || !isAuth ? (
-        <div className="flex justify-between gap-8">
+        <div className="flex flex-col-reverse sm:flex-row justify-between gap-8">
           <div className="container mx-auto flex w-full flex-wrap px-4 pt-4 pb-12 gap-5 bg-[#292929] justify-center sm:justify-evenly xl:justify-evenly">
             {plants?.map((plant, idx) => (
               <PlantItem key={idx} plant={plant} />
@@ -75,13 +66,14 @@ export const MainPage = () => {
           </div>
           <div className="basis-2/5 md:basis-1/5 w-full flex flex-col gap-5">
             <div className=" w-full">
-              <div className="text-xs md:text-base xl:text-lg uppercase text-white ">
+              <div className="text-sm md:text-base xl:text-lg uppercase text-white text-center sm:text-start">
                 Popular:
               </div>
-
+              <div className="flex justify-center sm:flex-col gap-[20px] sm:gap-0">
               {popularPlants?.map((plant, idx) => (
                 <PopularPlants key={idx} plant={plant} />
               ))}
+              </div>
             </div>
           </div>
         </div>

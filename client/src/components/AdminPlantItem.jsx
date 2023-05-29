@@ -19,7 +19,6 @@ export const AdminPlantItem = ({ plant }) => {
         try {
             dispatch(removePlant(plant._id))
             navigate('/')
-            window.location.reload()
         } catch (error) {
             console.log(error)
         }
@@ -43,7 +42,7 @@ export const AdminPlantItem = ({ plant }) => {
             {plant.imgUrl && (
                 <div className=''>
                     <img
-                        src={`https://succulents.onrender.com/${plant.imgUrl}`}
+                        src={`https://anastasiyanekrasova.github.io//${plant.imgUrl}`}
                         alt='img'
                         className='min-w-[40px] h-[40px] w-[40px] mr-2 object-cover rounded-sm overflow-hidden'
                     />

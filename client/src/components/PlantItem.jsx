@@ -11,7 +11,7 @@ import { addPlantToUser, deletePlantFromUser, setPlantInterval } from "../redux/
 
 export const PlantItem = ({ plant }) => {
   const isAuth = useSelector(checkIsAuth);
-  const { status } = useSelector((state) => state.auth);
+  const { status } = useSelector((state) => state.plant);
   const { user } = useSelector((state) => state.auth);
 
   const [lastWatering, setLastWatering] = useState(plant.lastWatering);
@@ -27,9 +27,8 @@ export const PlantItem = ({ plant }) => {
     const userId = user._id;
     const plantId = plant._id;
     dispatch(addPlantToUser({ userId, plantId }));
-    if (status) {
+    if(status)
       toast(status);
-    }
   };
 
   const handleChangeWateringDate = async () => {
@@ -57,22 +56,10 @@ export const PlantItem = ({ plant }) => {
     }
   };
 
-  // const handleSaveInterval = async () => {
-  //   const userId = user._id;
-  //   const plantId = plant._id;
-  //   try {
-  //     const { data } = await axios.put(`/userplants/interval`, { userId, plantId, interval });
-  //     dispatch(setPlantInterval(data.interval));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const handleDeletePlantFromUser = async () => {
     const userId = user._id;
     const plantId = plant._id;
     dispatch(deletePlantFromUser({ userId, plantId }));
-    window.location.reload();
     if (status) {
       toast(status);
     }
@@ -106,22 +93,22 @@ export const PlantItem = ({ plant }) => {
 
   return (
     <div
-      className={`hover-grow ${isHovered ? "hovered" : ""} xl:w-64 sm:w-64 w-full p-5 flex flex-col items-center hover:shadow-2xl hover:shadow-gray-500 rounded-sm cursor-pointer`}
+      className={`hover-grow ${isHovered ? "hovered" : ""} w-full md:w-64 p-5 flex flex-col items-center hover:shadow-2xl hover:shadow-gray-500 rounded-sm cursor-pointer`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`hover-grow ${isHovered ? "hovered" : ""} flex rouded-sm xl:h-52 xl:w-52 md:h-52 md:w-52 h-52 w-full min-w-0`}
+        className={`hover-grow ${isHovered ? "hovered" : ""} flex rouded-sm md:w-52 h-52 w-full min-w-0`}
         onClick={handleLinkClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {plant.imgUrl && <img src={`https://succulents.onrender.com/${plant.imgUrl}`} alt="img" className="object-cover w-full" />}
+        {plant.imgUrl && <img src={`https://anastasiyanekrasova.github.io//${plant.imgUrl}`} alt="img" className="object-cover w-full" />}
       </div>
 
       <div className="flex flex-col justify-start md:w-52 w-full">
         <div className="flex justify-between gap-1 mt-2">
-          <div className="text-white text-xl xl:w-36 md:w-36 w-full min-w-0">{plant.plantname}</div>
+          <div className="text-white text-xl md:w-36 w-full min-w-0">{plant.plantname}</div>
           {isWateringNeeded && (
             <button
               onClick={(event) => {

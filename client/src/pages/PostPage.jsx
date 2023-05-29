@@ -111,7 +111,7 @@ export const PostPage = () => {
                         >
                             {post?.imgUrl && (
                                 <img
-                                    src={`https://succulents.onrender.com/${post.imgUrl}`}
+                                    src={`https://anastasiyanekrasova.github.io//${post.imgUrl}`}
                                     alt='img'
                                     className='object-cover w-fit'
                                 />
