@@ -12,13 +12,13 @@ import { AdminPostItem } from "../components/AdminPostItem";
 
 export const ForumPage = () => {
 
-    const isAuth = useSelector(checkIsAuth);
-    const { user } = useSelector((state) => state.auth);
+  const isAuth = useSelector(checkIsAuth);
+  const { user } = useSelector((state) => state.auth);
 
-    const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { posts, popularPosts } = useSelector((state) => state.post);
 
@@ -27,7 +27,7 @@ export const ForumPage = () => {
   }, [posts]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 11;
+  const itemsPerPage = 8;
 
   // Logic to determine the index range of posts to display on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -52,28 +52,32 @@ export const ForumPage = () => {
   return (
     <div className="max-w-[1420px] w-[90%] mx-auto mt-32 md:mt-40 xl:mt-28">
       {user?.role[0] === "user" || !isAuth ? (
-        <div className="flex justify-between gap-8">
-          <div className="scrollbar container max-h-[80vh] overflow-y-scroll mx-auto flex w-full flex-wrap px-4 pt-4 pb-12 gap-5 bg-[#292929] justify-center sm:justify-evenly xl:justify-evenly">
+        <div className="flex flex-col-reverse sm:flex-row justify-between gap-8">
+          <div className="container mx-auto flex w-full flex-wrap px-4 pt-4 pb-12 gap-5 bg-[#292929] justify-center sm:justify-evenly xl:justify-evenly">
             {posts?.map((post, idx) => (
               <PostItem key={idx} post={post} />
             ))}
           </div>
-          <div className="basis-2/5 md:basis-1/5 w-full">
-            <div className="text-xs md:text-base xl:text-lg uppercase text-white ">
-              Popular:
-            </div>
+          <div className="basis-2/5 md:basis-1/5 w-full flex flex-col gap-5">
+            <div className=" w-full">
+              <div className="text-sm md:text-base xl:text-lg uppercase text-white text-center sm:text-start">
 
-            {popularPosts?.map((post, idx) => (
-              <PopularPosts key={idx} post={post} />
-            ))}
+                Popular:
+              </div>
+              <div className="flex justify-center sm:flex-col gap-[20px] sm:gap-0">
+
+                {popularPosts?.map((post, idx) => (
+                  <PopularPosts key={idx} post={post} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       ) : (
         <div className="w-full flex flex-col">
           <div
-            className={`hover-grow ${
-              isHovered ? "hovered" : ""
-            } flex h-12 bg-[#292929] text-xs w-full md:text-base xl:text-lg p-2 text-gray-300 hover:bg-[#3E3E3E] hover:text-white gap-5`}
+            className={`hover-grow ${isHovered ? "hovered" : ""
+              } flex h-12 bg-[#292929] text-xs w-full md:text-base xl:text-lg p-2 text-gray-300 hover:bg-[#3E3E3E] hover:text-white gap-5`}
             onClick={(e) => navigate("/posts/new")}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -90,9 +94,8 @@ export const ForumPage = () => {
               {Array.from({ length: totalPages }, (_, index) => (
                 <button
                   key={index}
-                  className={`mx-1 w-6 text-center rounded bg-gray-600 text-gray-200 hover:opacity-80 hover:text-white transition-colors duration-300 ${
-                    currentPage === index + 1 ? "bg-green-500 text-white" : ""
-                  }`}
+                  className={`mx-1 w-6 text-center rounded bg-gray-600 text-gray-200 hover:opacity-80 hover:text-white transition-colors duration-300 ${currentPage === index + 1 ? "bg-green-500 text-white" : ""
+                    }`}
                   onClick={() => handleClickPage(index + 1)}
                 >
                   {index + 1}

@@ -12,7 +12,7 @@ import { checkAuth } from '../utils/checkAuth.js'
 import { checkRole } from '../utils/checkRole.js'
 const router = new Router()
 
-router.post('/', checkAuth, checkRole('user'), createPost)
+router.post('/', checkAuth, createPost)
 router.get('/', checkAuth, getAllPosts)
 router.get('/:id', checkAuth, getPostById)
 router.put('/:id', checkAuth, updatePost)

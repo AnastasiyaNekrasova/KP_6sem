@@ -103,7 +103,7 @@ export const PlantItem = ({ plant }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {plant.imgUrl && <img src={`https://anastasiyanekrasova.github.io//${plant.imgUrl}`} alt="img" className="object-cover w-full" />}
+        {plant.imgUrl && <img src={`https://succulents.onrender.com/${plant.imgUrl}`} alt="img" className="object-cover w-full" />}
       </div>
 
       <div className="flex flex-col justify-start md:w-52 w-full">

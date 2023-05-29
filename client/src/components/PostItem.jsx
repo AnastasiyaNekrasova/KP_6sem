@@ -28,7 +28,7 @@ export const PostItem = ({ post }) => {
       <div className={post.imgUrl ? "flex rouded-sm h-80 justify-center bg-white bg-opacity-10 rounded-sm" : "flex rounded-sm"}>
         {post.imgUrl && (
           <img
-            src={`https://anastasiyanekrasova.github.io//${post.imgUrl}`}
+            src={`https://succulents.onrender.com/${post.imgUrl}`}
             alt="img"
             className="object-cover w-fit"
           />

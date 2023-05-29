@@ -42,7 +42,7 @@ export const AdminPlantItem = ({ plant }) => {
             {plant.imgUrl && (
                 <div className=''>
                     <img
-                        src={`https://anastasiyanekrasova.github.io//${plant.imgUrl}`}
+                        src={`https://succulents.onrender.com/${plant.imgUrl}`}
                         alt='img'
                         className='min-w-[40px] h-[40px] w-[40px] mr-2 object-cover rounded-sm overflow-hidden'
                     />
@@ -53,7 +53,7 @@ export const AdminPlantItem = ({ plant }) => {
                     {plant.plantname}
                 </div>
                 <div className=''>
-                    <div className='w-[17rem] md:w-[28rem] lg:w-[43rem] xl:w-[58rem] 2xl:w-[73rem] overflow-hidden flex text-xs text-ellipsis whitespace-nowrap'>
+                    <div className='w-[17rem] md:w-[28rem] lg:w-[43rem] xl:w-[58rem] 2xl:w-[71rem] overflow-hidden flex text-xs text-ellipsis whitespace-nowrap'>
                         <div className='overflow-hidden text-ellipsis whitespace-nowrap'>
                             {plant.descript}
                         </div>

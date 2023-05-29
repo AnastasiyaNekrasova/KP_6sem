@@ -93,12 +93,6 @@ export const PostPage = () => {
     }
     return (
         <div className='mt-20 w-[90%] mx-auto'>
-            <button className='text-sm md:text-basic xl:text-lg text-white border max-w-fit border-white font-bold hover:bg-[#292929] py-1 px-5 mt-5'>
-                <Link className='flex' to={'/forum'}>
-                    Back
-                </Link>
-            </button>
-
             <div className='flex gap-10 py-8'>
                 <div className='w-2/3'>
                     <div className='flex flex-col basis-1/4 flex-grow'>
@@ -111,7 +105,7 @@ export const PostPage = () => {
                         >
                             {post?.imgUrl && (
                                 <img
-                                    src={`https://anastasiyanekrasova.github.io//${post.imgUrl}`}
+                                    src={`https://succulents.onrender.com/${post.imgUrl}`}
                                     alt='img'
                                     className='object-cover w-fit'
                                 />
