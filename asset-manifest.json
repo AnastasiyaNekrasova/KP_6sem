@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/KP_6sem/static/css/main.583c5b0a.css",
-    "main.js": "/KP_6sem/static/js/main.272d645e.js",
-    "static/media/suk-bg-dark.png": "/KP_6sem/static/media/suk-bg-dark.5013902a7a6c98e433e1.png",
-    "static/media/robot.gif": "/KP_6sem/static/media/robot.0617a41936621e9697cd.gif",
-    "static/media/loader.gif": "/KP_6sem/static/media/loader.b40fc3d91ff1f4db53e2.gif",
-    "static/media/photo.jpg": "/KP_6sem/static/media/photo.23813a937abd2bcde26f.jpg",
-    "static/media/free-icon-avatar-805390.png": "/KP_6sem/static/media/free-icon-avatar-805390.fe5bdf1cb1479d8d322a.png",
-    "static/media/puffer-fish.png": "/KP_6sem/static/media/puffer-fish.fbea6fc5e12143f0a54e.png",
-    "static/media/walrus.png": "/KP_6sem/static/media/walrus.3e4201be03150bcc76c9.png",
-    "static/media/deer.png": "/KP_6sem/static/media/deer.10fedc5c807b2315da07.png",
-    "static/media/panda.png": "/KP_6sem/static/media/panda.0253ba0e4ab6e6b77c68.png",
-    "static/media/dog.png": "/KP_6sem/static/media/dog.f9eb1be80a2c19b336b6.png",
-    "static/media/Logo9.svg": "/KP_6sem/static/media/Logo9.dbc82f9f72dc98f63c4631f969808bed.svg",
-    "static/media/chicken.png": "/KP_6sem/static/media/chicken.2d84c623074f80d20c18.png",
-    "static/media/Logo.svg": "/KP_6sem/static/media/Logo.bfadd1119944da7692e31e8c8a952a87.svg",
-    "static/media/vk.svg": "/KP_6sem/static/media/vk.68cf8f8e97db2a8d4581631967e27b11.svg",
-    "static/media/addImageWhite.svg": "/KP_6sem/static/media/addImageWhite.626dbe7cfb056ee01b1581e4d3d9bf52.svg",
-    "index.html": "/KP_6sem/index.html",
-    "main.583c5b0a.css.map": "/KP_6sem/static/css/main.583c5b0a.css.map",
-    "main.272d645e.js.map": "/KP_6sem/static/js/main.272d645e.js.map"
+    "main.css": "/static/css/main.2bf8999d.css",
+    "main.js": "/static/js/main.ca648cf5.js",
+    "static/media/suk-bg-dark.png": "/static/media/suk-bg-dark.5013902a7a6c98e433e1.png",
+    "static/media/robot.gif": "/static/media/robot.0617a41936621e9697cd.gif",
+    "static/media/loader.gif": "/static/media/loader.b40fc3d91ff1f4db53e2.gif",
+    "static/media/photo.jpg": "/static/media/photo.23813a937abd2bcde26f.jpg",
+    "static/media/free-icon-avatar-805390.png": "/static/media/free-icon-avatar-805390.fe5bdf1cb1479d8d322a.png",
+    "static/media/puffer-fish.png": "/static/media/puffer-fish.fbea6fc5e12143f0a54e.png",
+    "static/media/walrus.png": "/static/media/walrus.3e4201be03150bcc76c9.png",
+    "static/media/deer.png": "/static/media/deer.10fedc5c807b2315da07.png",
+    "static/media/panda.png": "/static/media/panda.0253ba0e4ab6e6b77c68.png",
+    "static/media/dog.png": "/static/media/dog.f9eb1be80a2c19b336b6.png",
+    "static/media/Logo9.svg": "/static/media/Logo9.dbc82f9f72dc98f63c4631f969808bed.svg",
+    "static/media/chicken.png": "/static/media/chicken.2d84c623074f80d20c18.png",
+    "static/media/Logo.svg": "/static/media/Logo.bfadd1119944da7692e31e8c8a952a87.svg",
+    "static/media/vk.svg": "/static/media/vk.68cf8f8e97db2a8d4581631967e27b11.svg",
+    "static/media/addImageWhite.svg": "/static/media/addImageWhite.626dbe7cfb056ee01b1581e4d3d9bf52.svg",
+    "index.html": "/index.html",
+    "main.2bf8999d.css.map": "/static/css/main.2bf8999d.css.map",
+    "main.ca648cf5.js.map": "/static/js/main.ca648cf5.js.map"
   },
   "entrypoints": [
-    "static/css/main.583c5b0a.css",
-    "static/js/main.272d645e.js"
+    "static/css/main.2bf8999d.css",
+    "static/js/main.ca648cf5.js"
   ]
 }
