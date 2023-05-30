@@ -1,11 +1,10 @@
 {
   "files": {
-    "main.css": "/KP_6sem/static/css/main.cfb94485.css",
-    "main.js": "/KP_6sem/static/js/main.f02e4b30.js",
+    "main.css": "/KP_6sem/static/css/main.293e9815.css",
+    "main.js": "/KP_6sem/static/js/main.eb109a5c.js",
     "static/media/suk-bg-dark.png": "/KP_6sem/static/media/suk-bg-dark.5013902a7a6c98e433e1.png",
     "static/media/robot.gif": "/KP_6sem/static/media/robot.0617a41936621e9697cd.gif",
     "static/media/loader.gif": "/KP_6sem/static/media/loader.b40fc3d91ff1f4db53e2.gif",
-    "static/media/photo.jpg": "/KP_6sem/static/media/photo.23813a937abd2bcde26f.jpg",
     "static/media/free-icon-avatar-805390.png": "/KP_6sem/static/media/free-icon-avatar-805390.fe5bdf1cb1479d8d322a.png",
     "static/media/puffer-fish.png": "/KP_6sem/static/media/puffer-fish.fbea6fc5e12143f0a54e.png",
     "static/media/walrus.png": "/KP_6sem/static/media/walrus.3e4201be03150bcc76c9.png",
@@ -18,11 +17,11 @@
     "static/media/vk.svg": "/KP_6sem/static/media/vk.68cf8f8e97db2a8d4581631967e27b11.svg",
     "static/media/addImageWhite.svg": "/KP_6sem/static/media/addImageWhite.626dbe7cfb056ee01b1581e4d3d9bf52.svg",
     "index.html": "/KP_6sem/index.html",
-    "main.cfb94485.css.map": "/KP_6sem/static/css/main.cfb94485.css.map",
-    "main.f02e4b30.js.map": "/KP_6sem/static/js/main.f02e4b30.js.map"
+    "main.293e9815.css.map": "/KP_6sem/static/css/main.293e9815.css.map",
+    "main.eb109a5c.js.map": "/KP_6sem/static/js/main.eb109a5c.js.map"
   },
   "entrypoints": [
-    "static/css/main.cfb94485.css",
-    "static/js/main.f02e4b30.js"
+    "static/css/main.293e9815.css",
+    "static/js/main.eb109a5c.js"
   ]
 }
