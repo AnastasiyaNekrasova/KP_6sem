@@ -22,8 +22,6 @@ export const LoginPage = () => {
     const handleSubmit = () => {
         try {
             dispatch(loginUser({ username, password }))
-            setPassword('')
-            setUsername('')
         } catch (error) {
             console.log(error)
         }

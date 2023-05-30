@@ -11,7 +11,6 @@ import postRoute from './routes/postsRoute.js';
 import commentRoute from './routes/commentsRoute.js';
 import plantsRoute from './routes/plantsRoute.js';
 import userPlantsRoute from './routes/userPlantsRoute.js';
-import userInfoRoute from './routes/userInfoRoute.js';
 import messageRoute from "./routes/messagesRoute.js";
 
 // Создайте приложение Express
@@ -36,7 +35,6 @@ app.use('/api/posts', postRoute);
 app.use('/api/comments', commentRoute);
 app.use('/api/userplants', userPlantsRoute);
 app.use('/api/plants', plantsRoute);
-app.use('/api/userinfo', userInfoRoute);
 app.use("/api/messages", messageRoute);
 
 // Сервер HTTP

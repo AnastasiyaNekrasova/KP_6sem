@@ -37,7 +37,6 @@ export const ChatPage = () => {
             if (user.isAvatarImageSet) {
                 getUserInfo() 
             } else {
-                console.log(user.isAvatarImageSet);
             navigate("/setAvatar");
             }
         }

@@ -31,6 +31,16 @@ export const getAllPlants = createAsyncThunk('plant/getAllPlants', async () => {
     }
 })
 
+export const searching = createAsyncThunk('plant/searching', async (searchQuery) => {
+    try {
+      const { data } = await axios.get(`/plants/search/${searchQuery}`);
+      return data
+    } catch (error) {
+      alert(error)
+    }
+  }
+)
+
 export const removePlant = createAsyncThunk('plant/removePlant', async (id) => {
     try {
         const { data } = await axios.delete(`/plants/${id}`, id)
@@ -124,6 +134,17 @@ export const plantSlice = createSlice({
             state.popularPlants = action.payload.popularPlants
         },
         [getAllPlants.rejected]: (state) => {
+            state.loading = false
+        },
+
+        [searching.pending]: (state) => {
+            state.loading = true
+        },
+        [searching.fulfilled]: (state, action) => {
+            state.loading = false
+            state.plants = action.payload.plants
+        },
+        [searching.rejected]: (state) => {
             state.loading = false
         },
 

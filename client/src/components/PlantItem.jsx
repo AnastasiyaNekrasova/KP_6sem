@@ -23,12 +23,23 @@ export const PlantItem = ({ plant }) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const handleAddPlantToUser = () => {
+  const handleAddPlantToUser = async () => {
     const userId = user._id;
     const plantId = plant._id;
-    dispatch(addPlantToUser({ userId, plantId }));
-    if(status)
-      toast(status);
+    // dispatch(addPlantToUser({ userId, plantId })).unwrap()
+    // .then((originalPromiseResult) => {
+    //   console.log(originalPromiseResult.message)
+    //     toast(originalPromiseResult.message);
+    // })
+    // .catch((rejectedValueOrSerializedError) => {
+    //   alert('error')
+    //   // handle error here
+    // })
+    const result = await dispatch(addPlantToUser({ userId, plantId }))
+    if (result?.payload?.message) {
+      toast(result?.payload?.message)
+    }
+    
   };
 
   const handleChangeWateringDate = async () => {
@@ -59,9 +70,9 @@ export const PlantItem = ({ plant }) => {
   const handleDeletePlantFromUser = async () => {
     const userId = user._id;
     const plantId = plant._id;
-    dispatch(deletePlantFromUser({ userId, plantId }));
-    if (status) {
-      toast(status);
+    const result = await dispatch(deletePlantFromUser({ userId, plantId }))
+    if (result?.payload?.message) {
+      toast(result?.payload?.message)
     }
   };
 

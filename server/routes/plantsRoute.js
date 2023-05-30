@@ -2,6 +2,7 @@ import { Router } from 'express'
 import {
     createPlant,
     getAllPlants,
+    getPlantByName,
     getPlantById,
     removePlant,
     updatePlant,
@@ -13,6 +14,7 @@ const router = new Router()
 
 router.post('/', checkAuth, createPlant)
 router.get('/', getAllPlants)
+router.get('/search/:plantName', getPlantByName)
 router.get('/:id',  checkAuth, getPlantById)
 router.put('/:id', checkAuth, updatePlant)
 router.delete('/:id', checkAuth, removePlant)

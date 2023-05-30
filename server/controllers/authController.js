@@ -7,7 +7,6 @@ import jwt from 'jsonwebtoken'
 export const register = async (req, res) => {
     try {
         const { username, email, password } = req.body;
-        console.log('ok')
         if (!username || !password) {
             return res.json({
                 message: 'Fill in all the fields!'

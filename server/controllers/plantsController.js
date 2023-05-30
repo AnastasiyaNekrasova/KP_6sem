@@ -67,7 +67,7 @@ export const getPlantById = async (req, res) => {
         if (!plant) {
             return res.json({ message: 'No such plant' });
         }
-
+        console.log(plant)
         res.json(plant);
     } catch (error) {
         res.json({ message: 'Something went wrong( --getPlantById--' })
@@ -127,6 +127,18 @@ export const getPlantComments = async (req, res) => {
             })
         );
         res.json(list)
+    } catch (error) {
+        res.json({ message: 'Something went wrong( --getPlantComments--' })
+    }
+
+}
+
+export const getPlantByName = async (req, res) => {
+    try {
+        const plantName = req.params.plantName
+        const regexPattern = new RegExp(plantName, "i"); // Флаг "i" для регистронезависимого поиска
+        const plants = await Plant.find({ plantname: regexPattern });
+        res.json({ plants: plants })
     } catch (error) {
         res.json({ message: 'Something went wrong( --getPlantComments--' })
     }

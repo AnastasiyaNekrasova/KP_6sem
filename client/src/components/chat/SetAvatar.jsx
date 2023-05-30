@@ -38,7 +38,6 @@ export const SetAvatar = () => {
     if (selectedAvatar === '') {
       toast.error("Please select an avatar", toastOptions);
     } else {
-      console.log('data:image/svg+xml;base64,' + avatars[selectedAvatar])
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
         image: 'data:image/svg+xml;base64,' + avatars[selectedAvatar],
       });

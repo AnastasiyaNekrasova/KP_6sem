@@ -11,9 +11,6 @@ export const Contacts = ({ contacts, changeChat }) => {
   const [currentUserName, setCurrentUserName] = useState('');
   const [currentUserImage, setCurrentUserImage] = useState(user.avatarImage);
   const [currentSelected, setCurrentSelected] = useState('');
-  const [userRole, setUserRole] = useState(user.role);
-
-  console.log(contacts)
 
   useEffect(() => {
     setCurrentUserName(user.username);

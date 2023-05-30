@@ -5,6 +5,8 @@ import { PlantItem } from "../components/PlantItem";
 import { getAllPlants } from "../redux/features/plant/plantSlice";
 import { checkIsAuth, resetStatus } from "../redux/features/auth/authSlice";
 import { BsPlusSquare } from 'react-icons/bs'
+import { searching } from "../redux/features/plant/plantSlice";
+import axios from "../utils/axios";
 
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +16,7 @@ export const MainPage = () => {
   const isAuth = useSelector(checkIsAuth);
   const { user } = useSelector((state) => state.auth);
   const { plants, popularPlants } = useSelector((state) => state.plant);
+  const [searchQuery, setSearchQuery] = useState("");
   const { status } = useSelector((state) => state.plant);
 
   const navigate = useNavigate();
@@ -32,7 +35,7 @@ export const MainPage = () => {
 
   useEffect(() => {
     dispatch(getAllPlants());
-  }, [plants]);
+  }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
@@ -55,11 +58,29 @@ export const MainPage = () => {
     );
   }
 
+
+  const handleSearch = async () => {
+    try {
+      const trimmedQuery = searchQuery.trim();
+      if (trimmedQuery !== '') {
+        const result = await dispatch(searching(trimmedQuery))
+        console.log(result.payload.plants.length);
+        if (result.payload.plants.length === 0) {
+          toast('No plants found');
+          dispatch(getAllPlants())
+        }
+      }
+      else dispatch(getAllPlants())
+    } catch (error) {
+      alert(error)
+    }
+  };
+
   return (
     <div className="max-w-[1420px] w-[90%] mx-auto  mt-24 md:mt-28 xl:mt-28">
       {user?.role[0] === "user" || !isAuth ? (
         <div className="flex flex-col-reverse sm:flex-row justify-between gap-8">
-          <div className="container mx-auto flex w-full flex-wrap px-4 pt-4 pb-12 gap-5 bg-[#292929] justify-center sm:justify-evenly xl:justify-evenly">
+          <div className="container mx-auto flex w-full flex-wrap px-4 pt-4 pb-12 gap-3 bg-[#292929] justify-center sm:justify-evenly xl:justify-evenly">
             {plants?.map((plant, idx) => (
               <PlantItem key={idx} plant={plant} />
             ))}
@@ -70,9 +91,36 @@ export const MainPage = () => {
                 Popular:
               </div>
               <div className="flex justify-center sm:flex-col gap-[20px] sm:gap-0">
-              {popularPlants?.map((plant, idx) => (
-                <PopularPlants key={idx} plant={plant} />
-              ))}
+                {popularPlants?.map((plant, idx) => (
+                  <PopularPlants key={idx} plant={plant} />
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <div className="search relative mb-2">
+                <input
+                  id="search"
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    handleSearch();
+                  }}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      handleSearch();
+                    }
+                  }}
+                  placeholder=" "
+                  className="block rounded-md px-6 pt-6 bb-1 w-full text-md text-white bg-white bg-opacity-20  appearance-none focus:outline-none foring-0 peer"
+                />
+                <label
+                  htmlFor="search"
+                  className="absolute text-md text-zinc-300 duration-150 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
+                >
+                  Search
+                </label>
               </div>
             </div>
           </div>
@@ -109,47 +157,3 @@ export const MainPage = () => {
     </div>
   );
 };
-
-{
-  /* {isAuth && (<div className='w-full bg-[#292929] p-3 justify-center items-center'>
-                        <form
-                            // onSubmit={(e) => e.preventDefault()}
-                            className='w-full'>
-
-                            <div className="input">
-                                <div className='inputContainer  relative w-full mb-2 gap-2'>
-                                    <input
-                                        id='user'
-                                        type='text'
-                                        value={user?.username}
-                                        readOnly
-                                        placeholder=' '
-                                        className='block rounded-md px-6 pt-6 bb-1 w-full text-md text-white bg-white bg-opacity-20  appearance-none focus:outline-none focus:ring-0 peer'
-                                    ></input>
-                                    <label htmlFor="user" className="absolute text-md text-zinc-300 duration-150 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3">Username</label>
-                                </div>
-
-                                <div className='inputContainer relative w-full mb-2 gap-2'>
-                                    <input
-                                        id='room'
-                                        type='text'
-                                        value={room}
-                                        onChange={(e) => setRoom(e.target.value)}
-                                        placeholder=' '
-                                        required
-                                        className='block rounded-md px-6 pt-6 bb-1 w-full text-md text-white bg-white bg-opacity-20  appearance-none focus:outline-none focus:ring-0 peer'
-                                    ></input>
-                                    <label htmlFor="room" className="absolute text-md text-zinc-300 duration-150 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3">Room</label>
-                                </div>
-
-                                <Link to={`/chat?name=${user?.username}&room=${room}`}>
-                                    <div
-                                        className='flex justify-center'>
-                                        <button type='submit' disabled={isDisabled} className='text-sm md:text-basic xl:text-lg  text-white border max-w-fit border-white font-bold hover:bg-[#434343] py-1 px-5 mt-5'>Join Chat</button>
-                                    </div>
-                                </Link>
-                            </div>
-                        </form>
-                    </div>
-                    )} */
-}

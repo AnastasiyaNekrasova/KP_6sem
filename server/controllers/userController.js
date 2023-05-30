@@ -1,15 +1,16 @@
 import User from '../models/User.js'
+import UserPlants from '../models/UserPlants.js';
 
 export const getAllUsers = async (req, res, next) => {
     try {
         const users = await User.find({ _id: { $ne: req.params.id } })
-          .select(["email", "username", "avatarImage", "role", "_id"])
-          .sort({ role: 1 });
-    
+            .select(["email", "username", "avatarImage", "role", "_id"])
+            .sort({ role: 1 });
+
         return res.json(users);
-      } catch (ex) {
+    } catch (ex) {
         next(ex);
-      }
+    }
 };
 
 export const setAvatar = async (req, res, next) => {

@@ -1,4 +1,5 @@
 import Plant from "../models/Plant.js";
+import Post from "../models/Post.js";
 import User from "../models/User.js";
 import UserPlants from "../models/UserPlants.js";
 
@@ -30,7 +31,7 @@ export const addPlantToUser = async (req, res) => {
     await newUserPlant.save();
     const lastWatering = newUserPlant.watering
 
-    return res.json({message:'You succesfully added plant to yours list', plant: { ...plant, lastWatering }});
+    return res.json({ message: 'You\'ve succesfully added plant to yours list', plant: { ...plant, lastWatering } });
   } catch (error) {
     res.json({ message: "Something went wrong( --createUserPlant--" });
   }
@@ -54,10 +55,25 @@ export const getUserPlants = async (req, res) => {
       const userPlant = userPlants.find((userPlant) => userPlant.plant.equals(plant._id));
       return { ...plant._doc, lastWatering: userPlant?.watering, interval: userPlant?.interval };
     });
-    return res.json({ plants: updatedPlants});
+    return res.json({ plants: updatedPlants });
   } catch (error) {
     res.json({ message: "Something went wrong( --getUserPlants--" });
   }
+};
+
+export const getUserInfo = async (req, res) => {
+  const user = await User.findById(req.params.id)
+  const userPosts = await Post.find({ author: req.params.id })
+  let postsCount = null
+  if (user) {
+    postsCount = user.posts.length
+  }
+  const plantsCount = (await UserPlants.find({ user: req.params.id })).length;
+  let viewsSum = 0;
+  for (const userPost of userPosts) {
+    viewsSum += userPost.views;
+  }
+  return res.json({viewsSum, postsCount, plantsCount})
 };
 
 export const removeUserPlant = async (req, res) => {
@@ -81,18 +97,18 @@ export const removeUserPlant = async (req, res) => {
 
 export const changeLastWatering = async (req, res) => {
   try {
-    const { userId, plantId} = req.body;
+    const { userId, plantId } = req.body;
     const watering = Date.now()
 
     const userPlant = await UserPlants.findOneAndUpdate(
       { user: userId, plant: plantId },
-      { $set: {watering: watering} }
+      { $set: { watering: watering } }
     );
 
     if (!userPlant) {
       return res.json({ message: "User doesn't have such a plant" });
     }
-    return res.json({ message: "You'he just watered your plant!!!", watering:userPlant.watering });
+    return res.json({ message: "You'he just watered your plant!!!", watering: userPlant.watering });
   } catch (error) {
     res.json({ message: "Something went wrong( --changeLastWatering--" });
   }
@@ -104,10 +120,10 @@ export const changeWateringInterval = async (req, res) => {
 
     const userPlant = await UserPlants.findOneAndUpdate(
       { user: userId, plant: plantId },
-      { $set: {interval: interval} }
+      { $set: { interval: interval } }
     );
     if (!userPlant) {
-      return res.json({ message: "User doesn't have such a plant", interval:userPlant.interval  });
+      return res.json({ message: "User doesn't have such a plant", interval: userPlant.interval });
     }
 
     res.status(200).json({ message: "You'he just changed watering interval" });

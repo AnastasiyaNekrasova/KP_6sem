@@ -77,14 +77,14 @@ export const PlantPage = () => {
         )
     }
     return (
-        <div className=' mt-32 md:mt-40 xl:mt-28'>
+        <div className=' mt-24 mx-5'>
             <div className='flex gap-10 py-8'>
                 <div className='w-2/3'>
                     <div className='flex flex-col basis-1/4 flex-grow'>
                         <div
                             className={
                                 plant?.imgUrl
-                                    ? 'flex rouded-sm h-80'
+                                    ? 'flex rouded-sm h-80 w-fit'
                                     : 'flex rounded-sm'
                             }
                         >
@@ -92,7 +92,7 @@ export const PlantPage = () => {
                                 <img
                                     src={`https://succulents.onrender.com/${plant.imgUrl}`}
                                     alt='img'
-                                    className='object-cover w-full'
+                                    className='w-fit object-cover'
                                 />
                             )}
                         </div>
